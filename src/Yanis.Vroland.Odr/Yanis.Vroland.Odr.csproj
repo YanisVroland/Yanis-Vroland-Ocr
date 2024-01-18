@@ -7,11 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="tessdata\" />
+      <PackageReference Include="Tesseract" Version="4.1.1" />
     </ItemGroup>
 
     <ItemGroup>
-      <PackageReference Include="Tesseract" Version="5.2.0" />
+      <None Update="tessdata\fra.traineddata">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

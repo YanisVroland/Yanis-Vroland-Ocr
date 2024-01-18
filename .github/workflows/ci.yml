@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: '8.0.0'
+          
+      - name: Build and Test
+        run: |
+          dotnet build -c Release
+          dotnet test
+
+      - name: Publish Console App
+        run: |
+          dotnet publish -c Release -r win10-x64 --self-contained
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: ConsoleApp
+          path: ./Yanis.Vroland.Ocr.Console/bin/Release/net5.0/win10-x64/publish
